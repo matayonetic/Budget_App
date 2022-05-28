@@ -1,12 +1,15 @@
 import React from "react";
+import ExpenseList from "./ExpenseList";
+import ExpenseListFilter from "./ExpenseListFilter";
 
 // Dashboard
 const ExpenseDashboard = () => {
   return (
     <div>
-      <h2>Home Page</h2>
+      <ExpenseListFilter />
+      <ExpenseList />
     </div>
   );
 };
 
-export default ExpenseDashboard
+export default ExpenseDashboard;

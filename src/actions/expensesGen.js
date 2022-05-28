@@ -28,10 +28,10 @@ export const editExpense = (id, updates) => {
   };
 };
 
-// Delete Expense
-export const deleteExpense = ({ id } = {}) => {
+// Remove Expense
+export const removeExpense = ({ id } = {}) => {
   return {
-    type: "DELETE_EXPENSE",
+    type: "REMOVE_EXPENSE",
     id,
   };
 };

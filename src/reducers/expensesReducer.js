@@ -17,7 +17,7 @@ const expensesReducer = (state = defaultExpense, action) => {
         }
       });
 
-    case "DELETE EXPENSE":
+    case "REMOVE_EXPENSE":
       return state.filter(({ id }) => id !== action.id);
 
     default:

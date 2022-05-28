@@ -6,7 +6,6 @@ import { Provider } from "react-redux";
 // Files
 import configureStore from "./store/configureStore";
 import { addExpense } from "./actions/expensesGen";
-import { sortByAmount, setTextFilter } from "./actions/filtersGen";
 import getVisibleExpenses from "./selectors/getVisibleExpenses";
 
 // CSS
@@ -26,12 +25,12 @@ store.subscribe(() => {
   console.log(visibleExpenses);  
 });
 
-// Dispatch Expenses
+// Sample Expenses
 const e1 = store.dispatch(
   addExpense({
     description: "Item One",
     amount: 22,
-    createdAt: -1000
+    createdAt: 1653555600000
   })
 );
 
@@ -39,12 +38,9 @@ const e2 = store.dispatch(
   addExpense({
     description: "Item Two",
     amount: 18,
-    createdAt: 1000
+    createdAt: 1653705599156
   })
 );
-
-// Dispatch Filters
-store.dispatch(sortByAmount())
 
 // Link App to Store
 const jsx = (

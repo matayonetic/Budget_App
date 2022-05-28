@@ -1,9 +1,11 @@
+import moment from "moment";
+
 // Default Filters
 const defaultFilters = {
   text: "",
   sortBy: "date",
-  startDate: undefined,
-  endDate: undefined,
+  startDate: moment().startOf('month'),
+  endDate: moment().endOf('month'),
 };
 
 // Filters Reducer
@@ -18,7 +20,7 @@ const filtersReducer = (state = defaultFilters, action) => {
     case "SORT_BY_DATE":
       return {
         ...state,
-        sortby: "date",
+        sortBy: "date",
       };
 
     case "SORT_BY_AMOUNT":
