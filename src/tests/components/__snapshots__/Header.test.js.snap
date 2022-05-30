@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render header correctly 1`] = `
+<header>
+  <h1>
+    Budget App
+  </h1>
+  <NavLink
+    to="/"
+  >
+    Home
+  </NavLink>
+    
+  <NavLink
+    to="/create"
+  >
+    Add Expense
+  </NavLink>
+    
+  <NavLink
+    to="/help"
+  >
+    Help
+  </NavLink>
+   
+  <br />
+</header>
+`;
