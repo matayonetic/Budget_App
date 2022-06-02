@@ -16,24 +16,15 @@ const EditExpense = () => {
     state.expenses.find((expense) => expense.id === id)
   );
 
-  // Reusable Dispatch
-  const editExpenseData = (id, expense) => {
-    dispatch(editExpense(id, expense));
-  };
-
-  const removeExpenseData = (id) => {
-    dispatch(removeExpense({ id }));
-  };
-
   // Edit Expense
   const editMyExpense = (expense) => {
-    editExpenseData(id, expense);
+    dispatch(editExpense(id, expense));
     navigate("/");
   };
 
   // Remove Expense
   const removeMyExpense = () => {
-    removeExpenseData(id);
+    dispatch(removeExpense({ id }));
     navigate("/");
   };
 

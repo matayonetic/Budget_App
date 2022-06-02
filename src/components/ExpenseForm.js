@@ -1,116 +1,125 @@
-import React, { useState } from "react";
+import React from "react";
 import moment from "moment";
 import "react-dates/initialize";
 import { SingleDatePicker } from "react-dates";
-import "react-dates/lib/css/_datepicker.css";
 
-const ExpenseForm = (props) => {
-  //
-  // Tracking Form Inputs
-  const [calenderFocused, setFocus] = useState(false);
-  const [error, setError] = useState("");
-  const [note, setNote] = useState(props.expense ? props.expense.note : "");
-
-  const [amount, setAmount] = useState(
-    props.expense ? (props.expense.amount / 100).toString() : ""
-  );
-
-  const [createdAt, setDate] = useState(moment());
-
-  const [description, setDescription] = useState(
-    props.expense ? props.expense.description : ""
-  );
+export default class ExpenseForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.changeDescription = this.changeDescription.bind(this);
+    this.changeAmount = this.changeAmount.bind(this);
+    this.state = {
+      description: props.expense ? props.expense.description : "",
+      note: props.expense ? props.expense.note : "",
+      amount: props.expense ? (props.expense.amount / 100).toString() : "",
+      createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
+      calendarFocused: false,
+      error: "",
+    };
+  }
 
   // Change Description
-  const changeDescription = (e) => {
-    setDescription(e.target.value);
-  };
-
-  // Change Note
-  const changeNote = (e) => {
-    setNote(e.target.value);
-  };
+  changeDescription(e) {
+    const description = e.target.value;
+    this.setState(() => {
+      return {
+        description,
+      };
+    });
+  }
 
   // Change Amount
-  const changeAmount = (e) => {
+  changeAmount(e) {
     const amount = e.target.value;
     if (!amount || amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
-      setAmount(amount);
+      this.setState(() => ({ amount }));
     }
-  };
+  }
+
+  // Change Note
+  changeNote = (e) => {
+    const note = e.target.value;
+    this.setState(() => ({
+      note,
+    }));
+  };  
 
   // Change Date
-  const onDateChange = (createdAt) => {
+  onDateChange = (createdAt) => {
     if (createdAt) {
-      setDate(createdAt);
+      this.setState(() => ({ createdAt }));
     }
   };
 
-  // Change Focus
-  const onFocusChange = ({ focused }) => {
-    setFocus(focused);
+  // Focus Change
+  onFocusChange = ({ focused }) => {
+    this.setState(() => ({ calendarFocused: focused }));
   };
 
   // Submit Form
-  const onSubmit = (e) => {
+  onSubmit = (e) => {
     e.preventDefault();
-    if (!description || !amount) {
-      setError("Please check description or amount");
+    if (!this.state.description || !this.state.amount) {
+      this.setState(() => {
+        return {
+          error: "Please check description or amount",
+        };
+      });
     } else {
-      setError("");
-
-      // Destructure "expense" argument
-      props.formData({
-        description,
-        amount: parseFloat(amount, 10) * 100,
-        createdAt: createdAt.valueOf(),
-        note,
+      this.setState(() => ({
+        error: "",
+      }));
+      this.props.formData({
+        description: this.state.description,
+        amount: parseFloat(this.state.amount, 10) * 100,
+        createdAt: this.state.createdAt.valueOf(),
+        note: this.state.note,
       });
     }
   };
 
-  return (
-    <div>
-      {error && <p>{error}</p>}
-      <form onSubmit={onSubmit}>
-        <input
-          placeholder="Description"
-          type="text"
-          value={description}
-          onChange={changeDescription}
-          autoFocus
-        />
-        <br />
-        <br />
-        <input
-          placeholder="Amount"
-          type="number"
-          value={amount}
-          onChange={changeAmount}
-        />
-        <br />
-        <br />
-        <SingleDatePicker
-          date={createdAt}
-          onDateChange={onDateChange}
-          focused={calenderFocused}
-          onFocusChange={onFocusChange}
-          numberOfMonths={1}
-          isOutsideRange={() => false}
-        />
-        <br />
-        <br />
-        <textarea
-          placeholder="Additional notes"
-          value={note}
-          onChange={changeNote}
-        ></textarea>
-        <br />
-        <br />
-        <button>Add Expense</button>
-      </form>
-    </div>
-  );
-};
-
-export default ExpenseForm;
+  render() {
+    return (
+      <div>
+        {this.state.error && <p>{this.state.error}</p>}
+        <form onSubmit={this.onSubmit}>
+          <input
+            type="text"
+            placeholder="Enter description"
+            autoFocus
+            value={this.state.description}
+            onChange={this.changeDescription}
+          />
+          <br />
+          <br />
+          <input
+            type="number"
+            placeholder="Enter amount"
+            value={this.state.amount}
+            onChange={this.changeAmount}
+          />
+          <br />
+          <br />
+          <SingleDatePicker
+            date={this.state.createdAt}
+            onDateChange={this.onDateChange}
+            focused={this.state.calendarFocused}
+            onFocusChange={this.onFocusChange}
+            numberOfMonths={1}
+            isOutsideRange={() => false}
+          />
+          <br />
+          <br />
+          <textarea
+            placeholder="Add a note for your expense (optional)..."
+            value={this.state.note}
+            onChange={this.changeNote}
+          ></textarea>
+          <br />
+          <br />
+          <button>Add Expense</button>
+        </form>
+      </div>
+    );
+  }
+}

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should render header correctly 1`] = `
+exports[`Should correctly render Header component 1`] = `
 <header>
   <h1>
     Budget App
