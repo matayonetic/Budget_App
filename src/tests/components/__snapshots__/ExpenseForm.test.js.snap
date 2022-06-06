@@ -121,7 +121,7 @@ exports[`Should render expense form correctly 1`] = `
     <br />
     <textarea
       onChange={[Function]}
-      placeholder="Add a note for your expense (optional)..."
+      placeholder="Add a note(optional)..."
       value=""
     />
     <br />
@@ -254,7 +254,7 @@ exports[`Should render expense form with props 1`] = `
     <br />
     <textarea
       onChange={[Function]}
-      placeholder="Add a note for your expense (optional)..."
+      placeholder="Add a note(optional)..."
       value="a"
     />
     <br />
