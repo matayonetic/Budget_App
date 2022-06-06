@@ -1,7 +1,6 @@
 config
 node_modules
 temp
-public/dist
 public/bundle.js
 public/bundle.js.LICENSE.txt
 public/bundle.js.map

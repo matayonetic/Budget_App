@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render ExpenseSummary correctly for multiple expenses 1`] = `
+<Fragment>
+  <h2>
+    Viewing 
+    3
+     expense(s) with a total of
+     
+    $0.06
+  </h2>
+</Fragment>
+`;
+
+exports[`Render ExpenseSummary correctly for one expense 1`] = `
+<Fragment>
+  <h2>
+    Viewing 
+    1
+     expense with a total of
+     
+    $0.01
+  </h2>
+</Fragment>
+`;
