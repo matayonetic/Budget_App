@@ -12,9 +12,8 @@
   },
   "author": "Matthew",
   "license": "MIT",
-  "engines": {
-    "npm" : ">=7.0.0",
-    "node": ">=12"
+  "engines": {    
+    "node": "16.13.2"
   },
   "dependencies": {
     "@babel/core": "^7.17.9",
