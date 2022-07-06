@@ -1,37 +1,84 @@
+import configureStore from "redux-mock-store";
+import thunk from "redux-thunk";
 import expenses from "../fixtures/expenses";
 import {
+  startAddExpense,
   addExpense,
   editExpense,
   removeExpense,
 } from "../../actions/expensesGen";
+import database from "../../firebase/firebase";
+
+// Get DB
+const db = database.getDatabase();
+
+// Mock Store
+const store = configureStore([thunk])({});
+
+// Add Default Expense
+test("Should add expense with defaults to database store", (done) => {  
+  const expenseDefaults = {
+    description: "",
+    amount: 0,
+    note: "",
+    createdAt: 0,
+  };
+  store
+    .dispatch(startAddExpense({}))
+    .then(() => {
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+        type: "ADD_EXPENSE",
+        expense: {
+          id: expect.any(String),
+          ...expenseDefaults,
+        },
+      });
+      return database.get(
+        database.ref(db, `expenses/${actions[0].expense.id}`)
+      );
+    })
+    .then((snapshot) => {
+      expect(snapshot.val()).toEqual(expenseDefaults);
+      done();
+    });
+});
+
+// Add Expense to Database Store
+test("Should add expense to database store", (done) => {
+  const expenseData = {
+    description: "Lock",
+    amount: 8,
+    note: "Main door",
+    createdAt: 1000,
+  };
+  store
+    .dispatch(startAddExpense(expenseData))
+    .then(() => {
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+        type: "ADD_EXPENSE",
+        expense: {
+          id: expect.any(String),
+          ...expenseData,
+        },
+      });
+      return database.get(
+        database.ref(db, `expenses/${actions[0].expense.id}`)
+      );
+    })
+    .then((snapshot) => {
+      expect(snapshot.val()).toEqual(expenseData);
+      done();
+    });
+});
 
 // Add Expense
 test("Should setup add expense action object", () => {
   const action = addExpense(expenses[0]);
   expect(action).toEqual({
     type: "ADD_EXPENSE",
-    expense: {
-      ...expenses[0],
-      id: expect.any(String),
-    },
-  });
-});
-
-// Add Default Expense
-test("Should setup action object for default expense", () => {
-  const exp = {
-    description: "",
-    amount: 0,
-    note: "",
-    createdAt: 0,
-  };
-  const action = addExpense(exp);
-  expect(action).toEqual({
-    type: "ADD_EXPENSE",
-    expense: {
-      id: expect.any(String),
-      ...exp,
-    },
+    expense: expenses[0],
   });
 });
 

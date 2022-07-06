@@ -14,6 +14,9 @@ import "react-dates/lib/css/_datepicker.css";
 // App Router
 import AppRouter from "./routes/AppRouter";
 
+// Link to Database
+import "./firebase/firebase"
+
 // Store
 const store = configureStore();
 

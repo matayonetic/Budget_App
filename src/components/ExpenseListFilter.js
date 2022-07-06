@@ -45,7 +45,7 @@ export class ExpenseListFilter extends React.Component {
   render() {
     return (
       <div>
-        <br />
+        
         Filter: &nbsp;
         <input
           type="text"

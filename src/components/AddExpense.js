@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "../react-redux-hooks";
 
-import { addExpense } from "../actions/expensesGen";
+import { startAddExpense } from "../actions/expensesGen";
 import ExpenseForm from "./ExpenseForm.js";
 
 
@@ -14,7 +14,7 @@ export const AddExpense = () => {
 
   // Dispatch
   const add_expense = (expense) => {
-    dispatch(addExpense(expense));
+    dispatch(startAddExpense(expense));
     navigate("/");
   };
 

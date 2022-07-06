@@ -14,7 +14,7 @@ const ExpensesSummary = () => {
 
   return (
     <>      
-      {eCount === 1 && (
+      {eCount <= 1 && (
         <h2>
           Viewing {eCount} expense with a total of{" "}
           {numeral(eTotal / 100).format("$0,0.00")}

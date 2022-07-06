@@ -2,7 +2,6 @@
 
 exports[`Should render ExpenseListFilter with data correctly 1`] = `
 <div>
-  <br />
   Filter:  
   <input
     onChange={[Function]}
@@ -136,7 +135,6 @@ exports[`Should render ExpenseListFilter with data correctly 1`] = `
 
 exports[`Should render ExpenseListFilter with default filters 1`] = `
 <div>
-  <br />
   Filter:  
   <input
     onChange={[Function]}
