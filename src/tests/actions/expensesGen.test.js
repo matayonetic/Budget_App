@@ -12,11 +12,22 @@ import database from "../../firebase/firebase";
 // Get DB
 const db = database.getDatabase();
 
+// Ref
+const Ref = database.ref(db, `expenses`);
+
 // Mock Store
 const store = configureStore([thunk])({});
 
+beforeEach((done) => {
+  const expenseData = {};
+  expenses.forEach(({ id, description, amount, note, createdAt }) => {
+    expenseData[id] = { description, amount, note, createdAt };
+  });
+  database.set(Ref, expenseData).then(() => done());
+});
+
 // Add Default Expense
-test("Should add expense with defaults to database store", (done) => {  
+test("Should add expense with defaults to database store", (done) => {
   const expenseDefaults = {
     description: "",
     amount: 0,
