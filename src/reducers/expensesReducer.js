@@ -1,12 +1,15 @@
 // Default Expenses
-const defaultExpense = [];
+const defaultState = [];
 
 // Expenses Reducer
-const expensesReducer = (state = defaultExpense, action) => {
+const expensesReducer = (state = defaultState, action) => {
   switch (action.type) {
     //
     case "ADD_EXPENSE":
       return [...state, action.expense];
+
+    case "SET_EXPENSE":
+      return action.expenses
 
     case "EDIT_EXPENSE":
       return state.map((expense) => {

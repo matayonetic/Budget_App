@@ -22,7 +22,7 @@ const ExpensesSummary = () => {
       )}
       {eCount >= 2 ? (
         <h2>
-          Viewing {eCount} expense(s) with a total of{" "}
+          Viewing {eCount} expenses with a total of{" "}
           {numeral(eTotal / 100).format("$0,0.00")}
         </h2>
       ) : (

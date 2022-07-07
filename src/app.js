@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 
 // Files
 import configureStore from "./store/configureStore";
+import { startSetExpenses } from "./actions/expensesGen";
 
 // CSS
 import "normalize.css/normalize.css";
@@ -15,7 +16,7 @@ import "react-dates/lib/css/_datepicker.css";
 import AppRouter from "./routes/AppRouter";
 
 // Link to Database
-import "./firebase/firebase"
+import "./firebase/firebase";
 
 // Store
 const store = configureStore();
@@ -29,4 +30,7 @@ const jsx = (
 
 // Render Application
 const root = ReactDOM.createRoot(document.getElementById("app"));
-root.render(jsx);
+root.render(<p>Loading...</p>);
+store.dispatch(startSetExpenses()).then(() => {
+  root.render(jsx);
+});
