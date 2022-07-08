@@ -1,6 +1,6 @@
 import React from "react";
 import ExpenseForm from "./ExpenseForm";
-import { editExpense, removeExpense } from "../actions/expensesGen";
+import { startEditExpense, startRemoveExpense } from "../actions/expensesGen";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "../react-redux-hooks";
 
@@ -18,13 +18,13 @@ const EditExpense = () => {
 
   // Edit Expense
   const editMyExpense = (expense) => {
-    dispatch(editExpense(id, expense));
+    dispatch(startEditExpense(id, expense));
     navigate("/");
   };
 
   // Remove Expense
   const removeMyExpense = () => {
-    dispatch(removeExpense({ id }));
+    dispatch(startRemoveExpense({ id }));
     navigate("/");
   };
 

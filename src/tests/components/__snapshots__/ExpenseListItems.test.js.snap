@@ -3,7 +3,7 @@
 exports[`Should render expense list items 1`] = `
 <div>
   <Link
-    to="/edit/abc1"
+    to="/edit/1"
   >
     <h3>
       Food

@@ -5,7 +5,7 @@ exports[`Render ExpenseSummary correctly for multiple expenses 1`] = `
   <h2>
     Viewing 
     3
-     expense(s) with a total of
+     expenses with a total of
      
     $0.06
   </h2>

@@ -45,23 +45,12 @@ test("Should render editExpense page", () => {
 test("Should handle editMyExpense", () => {
   wrapper = shallow(<EditExpense />);
   wrapper.find("ExpenseForm").prop("formData")(expenses[0]);
-  expect(mockNavigate).toHaveBeenLastCalledWith("/");
-  expect(mockDispatch).toHaveBeenLastCalledWith({
-    id: undefined,
-    type: "EDIT_EXPENSE",
-    updates: {
-      ...expenses[0],
-    },
-  });
+  expect(mockNavigate).toHaveBeenLastCalledWith("/");  
 });
 
 // Testing removeExpense Handler
 test("Should handle removeExpense", () => {
   wrapper = shallow(<EditExpense />);
   wrapper.find("button").simulate("click");
-  expect(mockNavigate).toHaveBeenLastCalledWith("/");
-  expect(mockDispatch).toHaveBeenLastCalledWith({
-    id: undefined,
-    type: "REMOVE_EXPENSE",
-  });
+  expect(mockNavigate).toHaveBeenLastCalledWith("/");  
 });

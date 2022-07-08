@@ -20,24 +20,24 @@ exports[`Should render expense list 1`] = `
     amount={1}
     createdAt={-86400000}
     description="Food"
-    id="abc1"
-    key="abc1"
+    id="1"
+    key="1"
     note="a"
   />
   <Connect(ExpenseListItems)
     amount={2}
     createdAt={0}
     description="Drinks"
-    id="abc2"
-    key="abc2"
+    id="2"
+    key="2"
     note="b"
   />
   <Connect(ExpenseListItems)
     amount={3}
     createdAt={172800000}
     description="Party"
-    id="abc3"
-    key="abc3"
+    id="3"
+    key="3"
     note="c"
   />
 </div>

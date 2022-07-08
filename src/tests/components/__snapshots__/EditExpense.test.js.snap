@@ -11,7 +11,7 @@ exports[`Should render editExpense page 1`] = `
         "amount": 1,
         "createdAt": -86400000,
         "description": "Food",
-        "id": "abc1",
+        "id": "1",
         "note": "a",
       }
     }

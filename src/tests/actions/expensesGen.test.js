@@ -3,12 +3,14 @@ import thunk from "redux-thunk";
 import expenses from "../fixtures/expenses";
 import expensesReducer from "../../reducers/expensesReducer";
 import {
-  startAddExpense,
   addExpense,
-  editExpense,
-  removeExpense,
+  startAddExpense,
   setExpenses,
   startSetExpenses,
+  editExpense,
+  startEditExpense,
+  removeExpense,
+  startRemoveExpense,
 } from "../../actions/expensesGen";
 import database from "../../firebase/firebase";
 
@@ -29,36 +31,17 @@ beforeEach((done) => {
   database.set(Ref, expenseData).then(() => done());
 });
 
-// Set / Fetch Expense
-test("Should set expenses", () => {
-  const action = { type: "SET_EXPENSE", expenses: expenses[1] };
-  const state = expensesReducer(expenses, action);
-  expect(state).toEqual([expenses[1]]);
-});
-
-test("Should setup SET_EXPENSE action object with data", () => {
-  const action = setExpenses(expenses);
+// Add Expense Action Object
+test("Should setup ADD_EXPENSE action object", () => {
+  const action = addExpense(expenses[0]);
   expect(action).toEqual({
-    type: "SET_EXPENSES",
-    expenses,
-  });
-});
-
-// Fetch Expense
-test("Should fetch expenses from firebase", (done) => {
-  store.dispatch(startSetExpenses()).then(() => {
-    const action = store.getActions();
-    expect(
-      action[0].toEqual({
-        type: "SET_EXPENSES",
-        expenses,
-      })
-    );
+    type: "ADD_EXPENSE",
+    expense: expenses[0],
   });
 });
 
 // Add Expense
-test("Should add expense to database store", (done) => {
+test("Should add an expense to database and store", (done) => {
   const expenseData = {
     description: "Lock",
     amount: 8,
@@ -87,7 +70,7 @@ test("Should add expense to database store", (done) => {
 });
 
 // Add Default Expense
-test("Should add expense to database store with defaults", (done) => {
+test("Should add expense to database and store with defaults", (done) => {
   const expenseDefaults = {
     description: "",
     amount: 0,
@@ -115,12 +98,32 @@ test("Should add expense to database store with defaults", (done) => {
     });
 });
 
-// Add Expense
-test("Should setup ADD_EXPENSE action object", () => {
-  const action = addExpense(expenses[0]);
+// Set Expenses
+test("Should set expenses", () => {
+  const action = { type: "SET_EXPENSE", expenses: expenses[1] };
+  const state = expensesReducer(expenses, action);
+  expect(state).toEqual([expenses[1]]);
+});
+
+test("Should setup SET_EXPENSE action object with data", () => {
+  const action = setExpenses(expenses);
   expect(action).toEqual({
-    type: "ADD_EXPENSE",
-    expense: expenses[0],
+    type: "SET_EXPENSE",
+    expenses,
+  });
+});
+
+// Fetch Expense
+test("Should fetch expenses from firebase", (done) => {
+  store.dispatch(startSetExpenses()).then(() => {
+    const action = store.getActions();
+    expect(
+      action[0].toEqual({
+        type: "SET_EXPENSE",
+        expenses,
+      })
+    );
+    done();
   });
 });
 
@@ -136,6 +139,26 @@ test("Should setup EDIT_EXPENSE action object", () => {
   });
 });
 
+test("Should edit an expense from firebase", (done) => {
+  const id = expenses[0].id;
+  const updates = { description: "Test Update" };
+  store
+    .dispatch(startEditExpense(id, updates))
+    .then(() => {
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+        type: "EDIT_EXPENSE",
+        id,
+        updates,
+      });
+      return database.get(database.ref(db, `expenses/${id}`));
+    })
+    .then((snapshot) => {
+      expect(snapshot.val().description).toBe("Test Update");
+      done();
+    });
+});
+
 // Remove Expense
 test("Should setup REMOVE_EXPENSE action object", () => {
   const action = removeExpense({ id: "abc123" });
@@ -143,4 +166,22 @@ test("Should setup REMOVE_EXPENSE action object", () => {
     type: "REMOVE_EXPENSE",
     id: "abc123",
   });
+});
+
+test("Should remove an expense from firebase", (done) => {
+  const id = expenses[0].id;
+  store
+    .dispatch(startRemoveExpense({ id }))
+    .then(() => {
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+        type: "REMOVE_EXPENSE",
+        id,
+      });
+      return database.get(database.ref(db, `expenses/${id}`));
+    })
+    .then((snapshot) => {
+      expect(snapshot.val()).toBeFalsy();
+      done();
+    });
 });

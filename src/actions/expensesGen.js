@@ -49,7 +49,7 @@ export const startSetExpenses = () => {
           id: childSnapshot.key,
           ...childSnapshot.val(),
         });
-      });      
+      });
       dispatch(setExpenses(expenses));
     });
   };
@@ -64,10 +64,28 @@ export const editExpense = (id, updates) => {
   };
 };
 
+export const startEditExpense = (id, updates) => {  
+  return (dispatch) => {
+    return database
+      .update(database.ref(db, `expenses/${id}`), updates)
+      .then(() => {
+        dispatch(editExpense(id, updates));
+      });
+  };
+};
+
 // Remove Expense
 export const removeExpense = ({ id } = {}) => {
   return {
     type: "REMOVE_EXPENSE",
     id,
+  };
+};
+
+export const startRemoveExpense = ({ id } = {}) => {
+  return (dispatch) => {
+    return database.remove(database.ref(db, `expenses/${id}`)).then(() => {
+      dispatch(removeExpense({ id }));
+    });
   };
 };
