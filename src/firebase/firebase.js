@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import * as firebaseDatabase from "firebase/database";
+import * as Auth from "firebase/auth";
+import * as database from "firebase/database";
 
 // Config
 const firebaseConfig = {
@@ -20,7 +21,10 @@ const app = initializeApp(firebaseConfig);
 // Analytics
 // getAnalytics(app);
 
-// Database
-const database = firebaseDatabase;
+// Get Auth
+const auth = Auth.getAuth();
 
-export { app, database as default };
+// Auth Provider
+const googleAuthProvider = new Auth.GoogleAuthProvider();
+
+export { auth, Auth, googleAuthProvider, database as default };

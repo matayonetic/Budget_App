@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should correctly render Header component 1`] = `
+exports[`Should render Header component correctly 1`] = `
 <header>
   <h1>
     Budget App
@@ -22,7 +22,11 @@ exports[`Should correctly render Header component 1`] = `
   >
     Help
   </NavLink>
-   
-  <br />
+    
+  <button
+    onClick={[Function]}
+  >
+    Logout
+  </button>
 </header>
 `;

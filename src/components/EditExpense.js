@@ -19,13 +19,13 @@ const EditExpense = () => {
   // Edit Expense
   const editMyExpense = (expense) => {
     dispatch(startEditExpense(id, expense));
-    navigate("/");
+    navigate("/dashboard");
   };
 
   // Remove Expense
   const removeMyExpense = () => {
     dispatch(startRemoveExpense({ id }));
-    navigate("/");
+    navigate("/dashboard");
   };
 
   // Render

@@ -8,14 +8,14 @@ import ExpenseForm from "./ExpenseForm.js";
 
 
 // Add Expense
-export const AddExpense = () => {
+const AddExpense = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   // Dispatch
   const add_expense = (expense) => {
     dispatch(startAddExpense(expense));
-    navigate("/");
+    navigate("/dashboard");
   };
 
   return (
