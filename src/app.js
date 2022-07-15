@@ -3,7 +3,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 
-// Files
+// Components / Files
+import LoadingPage from "./components/LoadingPage";
 import configureStore from "./store/configureStore";
 import { startSetExpenses } from "./actions/expensesGen";
 import { login, logout } from "./actions/auth";
@@ -19,11 +20,8 @@ import AppRouter from "./routes/AppRouter";
 // Firestore
 import { auth } from "./firebase/firebase";
 
-// Store
+// Redux Store
 const store = configureStore();
-
-// Loading Screen
-const loading = <p>Loading...</p>;
 
 // App (Linked to redux store)
 const app = (
@@ -36,7 +34,7 @@ const app = (
 const root = ReactDOM.createRoot(document.getElementById("app"));
 
 // Render 'Loading'
-root.render(loading);
+root.render(<LoadingPage />);
 
 // Check Render
 let hasRendered = false;

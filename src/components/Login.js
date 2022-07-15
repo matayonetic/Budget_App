@@ -29,8 +29,14 @@ const Login = () => {
   }, [auth]);
 
   return (
-    <div>
-      <button onClick={beginLogin}>Login</button>
+    <div className="box-layout">
+      <div className="box-layout__box">
+        <h1 className="box-layout__title">Budget</h1>
+        <p>Keeping track of your expenses</p>
+        <button className="login-button" onClick={beginLogin}>
+          Login with Google
+        </button>
+      </div>
     </div>
   );
 };

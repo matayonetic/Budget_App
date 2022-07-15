@@ -6,7 +6,6 @@ import { useDispatch } from "../react-redux-hooks";
 import { startAddExpense } from "../actions/expensesGen";
 import ExpenseForm from "./ExpenseForm.js";
 
-
 // Add Expense
 const AddExpense = () => {
   const navigate = useNavigate();
@@ -20,8 +19,14 @@ const AddExpense = () => {
 
   return (
     <div>
-      <h2>Add Expense</h2>
+      <div className="page-header">
+        <div className="content-container">
+          <h2 className="page-header__title">Add Expense</h2>          
+        </div>
+      </div>
+      <div className="content-container">
       <ExpenseForm formData={add_expense} />
+      </div>
     </div>
   );
 };

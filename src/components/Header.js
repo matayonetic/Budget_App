@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { startLogout } from "../actions/auth";
 import { useDispatch } from "../react-redux-hooks";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { auth } from "../../src/firebase/firebase";
 
 // Header
@@ -28,12 +28,18 @@ const Header = () => {
   const logStatus = !!auth.currentUser;
 
   return (
-    <header>
-      <h1>Budget App</h1>
-      <NavLink to={"/dashboard"}>Home</NavLink> &nbsp;
-      <NavLink to={"/create"}>Add Expense</NavLink> &nbsp;
-      <NavLink to={"/help"}>Help</NavLink> &nbsp;
-      {logStatus ? <button onClick={beginLogout}>Logout</button> : undefined}
+    <header className="header">
+      <div className="content-container">
+        <div className="header__content">
+          <Link className="header__title" to={"/dashboard"}>
+            <h1>Budget</h1>
+          </Link>{" "}
+          &nbsp;
+          {logStatus ? (
+            <button className="button button__link" onClick={beginLogout}>Logout</button>
+          ) : undefined}
+        </div>
+      </div>
     </header>
   );
 };

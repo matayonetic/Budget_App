@@ -31,11 +31,17 @@ const EditExpense = () => {
   // Render
   return (
     <div>
-      <h2>Edit Expense</h2>
-      <ExpenseForm expense={expense} formData={editMyExpense} />
-      <p>
-        <button onClick={removeMyExpense}>Remove</button>
-      </p>
+      <div className="page-header">
+        <div className="content-container">
+          <h2 className="page-header__title">Edit Expense</h2>
+        </div>
+      </div>
+      <div className="content-container">
+        <ExpenseForm expense={expense} formData={editMyExpense} />
+        <button className="button button__secondary" onClick={removeMyExpense}>
+          Remove Expense
+        </button>
+      </div>
     </div>
   );
 };
